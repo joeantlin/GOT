@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Event Info</title>
+    {% load static %}	
+    <link rel="stylesheet" href="{% static 'log_app/css/core_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'log_app/css/style.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+                <div class="nav1">
+                    <h1>Got GOT?</h1>
+                </div>
+                <div class="nav4">
+                    <p><a href="/shows">Dashboard</a> | <a href="shows/allevents">Upcoming Events</a> | <a href="/logout">Logout</a></p> 
+                </div>
+            </div>
+        <div class="main">
+            <h2>{{ the_event.name }}</h2>
+            <div>
+                <p>Host: {{ the_event.host.first_name }} {{ the_event.host.last_name }}</p>
+                <p>Genre: {{ the_event.genre }}</p>
+                <p>When: {{ the_event.date}}</p>
+                <p>Location: {{ the_event.location}}</p>
+            </div>
+
+            <h2>Attendees:</h2>
+            <div>
+            {% for attender in going %}
+                <p>{{ attender.first_name }} {{ attender.last_name }}</p>
+            {% endfor %}
+            </div>
+        </div>
+
+        <div class="footer">
+            {% if request.session.id == the_event.host.id %}
+                <a href="/shows/cancel/{{ the_event.id }}"><button>Cancel Event</button></a>
+            {% else %}
+                <a href="/shows/attend/{{ the_event.id }}"><button>Attend Event</button></a>
+            {% endif %}
+            
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+from apps.log_app.models import *
+from apps.shows.models import *
+
+user1 = User.objects.get(id=1)
+new_event = Event.objects.create(name="So much Blood!", genre="Horror", date="2019-01-09", location="Don's Basement", host="user1")
+
+user1 = User.objects.get(id=)
+new_event = Event.objects.create(name="So much Blood!", genre="Horror", date="2019-01-09", location="Don's Basement", host=user1)
+
+user1 = Book.objects.get(id=1)
+event1 = Event.objects.get(id=1)
+event1.attendees.add(user1)
+user1.events.add(event1)

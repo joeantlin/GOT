@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create Event</title>
+    {% load static %}	
+    <link rel="stylesheet" href="{% static 'log_app/css/core_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'log_app/css/style.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="nav1">
+                <h1>Got GOT?</h1>
+            </div>
+            <div class="nav4">
+                <p><a href="/shows">Dashboard</a> | <a href="/shows/allevents">Upcoming Events</a> | <a href="/logout">Logout</a></p> 
+            </div>
+        </div>
+        <div class="main">
+            <h2>Add an Upcoming Event</h2>
+
+            <form action="/shows/create/{{ request.session.id }}" method="post">
+                {% csrf_token %}
+                <label>
+                    Title
+                    <input type="text" name="title">
+                </label>
+                <label>
+                    Genre
+                    <select name="genre">
+                        <option value="Action">Action</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Sci-fi">Sci-Fi</option>
+                        <option value="Thriller">Thriller</option>
+                    </select>
+                </label>
+                <label>
+                    When
+                    <input type="date" name="date">
+                </label>
+                <label>
+                    Location
+                    <input type="text" name="location">
+                </label>
+                <input type="submit" value="Create Event">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

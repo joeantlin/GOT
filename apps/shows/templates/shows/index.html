@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NutFlux Dashboard</title>
+    {% load static %}	
+    <link rel="stylesheet" href="{% static 'log_app/css/core_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'log_app/css/style.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="nav1">
+                <h1>Got GOT?</h1>
+            </div>
+            <div class="nav4">
+                <p><a href="/shows">Dashboard</a> | <a href="shows/allevents">Upcoming Events</a> | <a href="/logout">Logout</a></p> 
+            </div>
+        </div>
+
+        <div class="main">
+            <h2>Stats</h2>
+            <div>
+                <p>Name: {{ logged.first_name }} {{ logged.last_name }}</p>
+                <p># of Events Hosted: {{ my_events.count }}</p>
+                <p># of Events Joined: {{ logged.events.count }}</p>
+                <p>Registration Date: {{ logged.created_at.date }}</p>
+            </div>
+
+            <h2>Your Upcoming Events</h2>
+            <table class="full"> 
+                <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>When</th>
+                    <th>Action</th>
+                </tr>
+                {% for event in my_events %}
+                    <tr>
+                        <td>{{ event.name }}</td>
+                        <td>{{ event.location }}</td>
+                        <td>{{ event.date }}</td>
+                        <td><a href="/shows/info/{{ event.id }}">View</a> | <a href="">Edit</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="footer">
+            <a href="/shows/create-event"><button>Create a TV Party</button></a>
+        </div>
+    </div>
+</body>
+</html>
